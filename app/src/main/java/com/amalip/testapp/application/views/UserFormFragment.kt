@@ -41,6 +41,7 @@ class UserFormFragment : BaseFragment(), IUserForm {
         super.onStart()
 
         setAgeListener()
+        setPhoneListener()
         checkFirstRun()
 
         (binding as UserFormFragmentBinding).vm = vm
@@ -49,6 +50,12 @@ class UserFormFragment : BaseFragment(), IUserForm {
         val selectedUser = requireArguments().getParcelable<User>("selectedUser")
         if (selectedUser != null)
             vm.setSelectedUser(selectedUser)
+    }
+
+    override fun onDestroyView() {
+        vm.firstRun.removeObservers(this)
+        listVM = null
+        super.onDestroyView()
     }
     //endregion
 
@@ -84,6 +91,23 @@ class UserFormFragment : BaseFragment(), IUserForm {
 
             override fun afterTextChanged(s: Editable?) {
                 vm.changeRelocationAutomatically()
+            }
+        })
+    }
+
+    private fun setPhoneListener() {
+        val form = (binding as UserFormFragmentBinding)
+        form.edtPhone.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                vm.setPhone(form.edtPhone.getText(true).toString())
             }
         })
     }

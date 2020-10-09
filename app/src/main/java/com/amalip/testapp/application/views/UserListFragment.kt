@@ -50,6 +50,16 @@ class UserListFragment : BaseFragment(), IUserList {
 
         setRecyclerView()
     }
+
+    override fun onDestroyView() {
+        vm.userList.removeObservers(this)
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        adapter = null
+        super.onDestroy()
+    }
     //endregion
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
