@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Ultimate Clown List</string>
+    <string name="emptyList">No records</string>
+    <string name="name">Name</string>
+    <string name="age">Age</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="relocation">Relocation</string>
+    <string name="generate_random">Generate random</string>
+    <string name="add_user">Add User</string>
+    <string name="update_user">Update User</string>
+    <string name="delete">Delete</string>
+    <string name="sure">Sure!</string>
+    <string name="ohNo">Oh no!</string>
+    <string name="deleteMessageAll">Sure you want to delete all the records?</string>
+    <string name="deleteMessage">Sure you want to delete this records?</string>
+    <string name="no_records">No records</string>
+    <string name="success">Clown Added</string>
+    <string name="update">Clown Updated</string>
+    <string name="errorName">Enter a valid name</string>
+    <string name="errorAge">Enter a valid age</string>
+    <string name="errorPhone">Enter a valid phone</string>
+    <string name="errorEmail">Enter a valid email</string>
+    <string name="errorForm">Please fill out the form</string>
+</resources>

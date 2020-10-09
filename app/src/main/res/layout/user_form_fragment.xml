@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.amalip.testapp.application.viewModels.UserFormViewModel" />
+
+        <variable
+            name="eh"
+            type="com.amalip.testapp.application.viewInterfaces.IUserForm" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".application.views.UserFormFragment">
+
+            <ImageView
+                android:id="@+id/imgUser"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadSrc="@{vm.user.image}" />
+
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:text="@={vm.user.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgUser" />
+
+            <EditText
+                android:id="@+id/edtAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/age"
+                android:inputType="number"
+                android:text="@={`` + vm.user.age}"
+                app:layout_constraintBottom_toTopOf="@id/edtEmail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edtName" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:text="@={vm.user.email}"
+                app:layout_constraintBottom_toTopOf="@id/edtPhone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edtAge" />
+
+            <com.github.reinaldoarrosi.maskededittext.MaskedEditText
+                android:id="@+id/edtPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="@string/phone"
+                android:inputType="number"
+                android:text="@{`` + vm.user.phone}"
+                app:layout_constraintBottom_toTopOf="@+id/btnRandom"
+                app:layout_constraintEnd_toStartOf="@+id/chkRelocation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edtEmail"
+                app:mask="+\1 (999) 999 9999"
+                app:placeholder="_" />
+
+            <CheckBox
+                android:id="@+id/chkRelocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:checked="@={vm.user.relocation}"
+                android:clickable="@{vm.canChangeRelocation}"
+                android:text="@string/relocation"
+                app:layout_constraintBottom_toBottomOf="@id/edtPhone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edtPhone"
+                app:layout_constraintTop_toTopOf="@id/edtPhone" />
+
+            <Button
+                android:id="@+id/btnRandom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:onClick="@{() -> eh.generateRandom()}"
+                android:text="@string/generate_random"
+                android:textColor="@android:color/white"
+                android:visibility="@{vm.addButtonsVisibility}"
+                app:layout_constraintBottom_toTopOf="@id/btnUpdate"
+                app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:onClick="@{() -> eh.addUser()}"
+                android:text="@string/add_user"
+                android:textColor="@android:color/white"
+                android:visibility="@{vm.addButtonsVisibility}"
+                app:layout_constraintBottom_toTopOf="@id/btnUpdate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnRandom" />
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow"
+                android:onClick="@{() -> eh.updateUser()}"
+                android:text="@string/update_user"
+                android:textColor="@android:color/white"
+                android:visibility="@{vm.updateButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
